@@ -76,7 +76,6 @@ CrZsJsPPZsGzwwsLwLmpwMDw
         "
         .to_string();
         let containers = parse_input(input);
-
         let shared: Vec<char> = containers
             .iter()
             .map(|x| find_shared(x.to_string()))
