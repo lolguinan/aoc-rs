@@ -14,29 +14,6 @@ fn parse_input(text: String) -> Vec<String> {
     containers
 }
 
-fn make_groups(containers: Vec<String>, size: usize) -> Vec<Vec<String>> {
-    let mut groups = Vec::new();
-    let mut counter = 0;
-    loop {
-        if counter >= containers.len() {
-            break;
-        }
-        if groups.len() == 0 {
-            groups.push(Vec::new());
-        }
-        let group = groups.last().unwrap();
-        if group.len() == size {
-            groups.push(Vec::new());
-        }
-        let group_size = groups.len();
-        let group = groups.get_mut(group_size - 1).unwrap();
-        let container = containers.get(counter).unwrap();
-        group.push(container.to_string());
-        counter += 1;
-    }
-    groups
-}
-
 fn find_shared_chars(lhs: String, rhs: String) -> Vec<char> {
     let mut shared = Vec::new();
     for a in lhs.chars() {
@@ -90,7 +67,7 @@ fn total_priority(groups: Vec<Vec<String>>) -> i32 {
 
 fn main() {
     let containers = parse_input(load_input(3));
-    let groups = make_groups(containers, 3);
+    let groups: Vec<Vec<String>> = containers.chunks(3).map(|x| x.to_vec()).collect();
     let priority = total_priority(groups);
     println!("Answer: {}", priority);
 }
@@ -111,7 +88,7 @@ CrZsJsPPZsGzwwsLwLmpwMDw
         "
         .to_string();
         let containers = parse_input(input);
-        let groups = make_groups(containers.to_vec(), 3);
+        let groups: Vec<Vec<String>> = containers.chunks(3).map(|x| x.to_vec()).collect();
         assert_eq!(2, groups.len());
         let badges: Vec<char> = groups.iter().map(|x| find_badge(x.to_vec())).collect();
         assert_eq!(vec!['r', 'Z'], badges);
