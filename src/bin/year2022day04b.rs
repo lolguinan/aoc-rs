@@ -58,7 +58,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn day04a_example1() {
+    fn day04b_example1() {
         let input = "
 2-4,6-8
 2-3,4-5
